@@ -7,21 +7,30 @@
 
     <style name="Theme.PrakticaBD" parent="Base.Theme.PrakticaBD" />
 
-    <style name="CustomButtonStyle">
-        <item name="android:backgroundTint">@color/greenbtt</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingBottom">8dp</item>
+    <style name="CustomButtonStyleTesr" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint"></item>
+        <item name="android:background"></item>
+    </style>
+    <style name="CustomButtonStyle_" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@drawable/battonbeg</item>
+        <item name="android:background">@drawable/battonbeg</item>
     </style>
 
-    <style name="CustomButtonStyleGR">
-        <item name="android:backgroundTint">@color/gray</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingBottom">8dp</item>
+    <style name="CustomButtonStyleGR" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@drawable/battonbeggr</item>
+        <item name="android:background">@drawable/battonbeggr</item>
     </style>
+
+    <style name="abod_bleck" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@drawable/batton_pin_st</item>
+        <item name="android:background">@drawable/batton_pin_st</item>
+    </style>
+
+    <style name="blue_batton_radius" parent="Widget.AppCompat.Button.Colored">
+        <item name="backgroundTint">@drawable/blue_batton_beg</item>
+        <item name="android:background">@drawable/blue_batton_beg</item>
+    </style>
+
+
+
 </resources>

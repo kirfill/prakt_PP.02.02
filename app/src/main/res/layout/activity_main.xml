@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    tools:context=".MainActivity"
+
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/street_facade_of_the_1"
-    tools:context=".MainActivity">
+    android:background="@drawable/street_facade_of_the_1">
+
 
     <LinearLayout
         android:background="#8030CCE1"
@@ -20,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="10dp"
         app:srcCompat="@drawable/logo_1" />
 
@@ -34,23 +35,24 @@
     android:textColor="#FFFFFF" />
 
     <LinearLayout
-        android:alpha="0.9"
+
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="50dp"
         android:padding="15dp"
-        android:background="@drawable/background_text">
+        android:background="@drawable/layout_beg_white_bl">
 
         <EditText
+
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textSize="25dp"
             android:padding="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
             android:background="@android:color/transparent" /> <!-- Прозрачный фон для EditText -->
 
         <EditText
@@ -60,21 +62,22 @@
             android:hint="Password"
             android:textSize="25dp"
             android:padding="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
             android:background="@android:color/transparent" /> <!-- Прозрачный фон для EditText -->
 
 
     </LinearLayout>
 
     <Button
+        android:background="@drawable/battonbeg"
+        style="@style/CustomButtonStyleTesr"
         android:id="@+id/button3"
         android:layout_width="350dp"
         android:layout_height="80dp"
         android:textSize="25dp"
         android:text="Войти"
-        android:layout_marginTop="50dp"
-        style="@style/CustomButtonStyle"/>
+        android:layout_marginTop="50dp" />
 
     <Button
         android:id="@+id/buttonregistr"
@@ -82,8 +85,9 @@
         android:layout_height="80dp"
         android:textSize="25dp"
         android:text="Регистрация"
-        android:layout_marginTop="50dp"
-        style="@style/CustomButtonStyleGR"/>
+        android:layout_marginTop="25dp"
+        android:background="@drawable/battonbeggr"
+        style="@style/CustomButtonStyleTesr"/>
 
     </LinearLayout>
 </LinearLayout>
