@@ -17,26 +17,59 @@ class RegActivity : AppCompatActivity() {
     private lateinit var usernameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
-    private lateinit var registerButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
 
-        // Инициализация views
-        usernameEditText = findViewById(R.id.Username)
-        emailEditText = findViewById(R.id.emailEditText)
-        passwordEditText = findViewById(R.id.password)
-        registerButton = findViewById(R.id.button4)
+        Log.d(TAG, "onCreate started")
 
-        registerButton.setOnClickListener {
-            val username = usernameEditText.text.toString()
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+        try {
+            // Инициализация views
+            usernameEditText = findViewById(R.id.Username)
+            emailEditText = findViewById(R.id.emailEditText)
+            passwordEditText = findViewById(R.id.password)
+            
+            // Находим кнопки
+            val saveButton: Button = findViewById(R.id.saveButton)
+            val loginButton: Button = findViewById(R.id.loginButton)
+            
+            Log.d(TAG, "Views initialized")
 
-            if (validateInput(username, email, password)) {
-                registerUser(username, email, password)
+            // Обработчик для кнопки регистрации
+            saveButton.setOnClickListener { view ->
+                Log.d(TAG, "Save button clicked")
+                Toast.makeText(this, "Кнопка нажата", Toast.LENGTH_SHORT).show()
+                
+                val username = usernameEditText.text.toString()
+                val email = emailEditText.text.toString()
+                val password = passwordEditText.text.toString()
+
+                if (validateInput(username, email, password)) {
+                    registerUser(username, email, password)
+                }
             }
+
+            // Обработчик для кнопки входа
+            loginButton.setOnClickListener { view ->
+                Log.d(TAG, "Login button clicked")
+                try {
+                    val tempEmail = "test@example.com"
+                    saveUserEmail(tempEmail)
+                    
+                    val intent = Intent(this, MainScreen::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Ошибка при переходе на MainScreen", e)
+                    showToast("Ошибка: ${e.message}")
+                }
+            }
+            
+            Log.d(TAG, "Listeners set")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error in onCreate", e)
+            Toast.makeText(this, "Ошибка инициализации: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -61,16 +94,10 @@ class RegActivity : AppCompatActivity() {
                 SupabaseClient.saveUserData(username, email, password)
                 Log.d(TAG, "Регистрация успешна, сохраняем email")
                 
-                // Сохраняем email в SharedPreferences
-                val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                with(sharedPref.edit()) {
-                    putString("USER_EMAIL", email)
-                    apply()
-                }
+                saveUserEmail(email)
                 
                 Log.d(TAG, "Email сохранен, переход к экрану ввода адреса")
                 
-                // Переходим к экрану ввода адреса вместо PIN
                 val intent = Intent(this@RegActivity, AddAddressActivity::class.java)
                 startActivity(intent)
                 Log.d(TAG, "Переход выполнен")
@@ -79,6 +106,14 @@ class RegActivity : AppCompatActivity() {
                 Log.e(TAG, "Ошибка при регистрации", e)
                 showToast("Ошибка регистрации: ${e.message}")
             }
+        }
+    }
+
+    private fun saveUserEmail(email: String) {
+        val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString("USER_EMAIL", email)
+            apply()
         }
     }
 

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">prakticaBD</string>
+    <string name="house">Твой дом</string>
+    <string name="adresss">г. Омск, ул. Ленина, д. 24</string>
+    <string name="rooms">Комнаты</string>
+    <string name="settings_button">Настройки профиля</string>
+    <string name="location_icon">Иконка местоположения</string>
+    <string name="add_button">Добавить новую комнату</string>
+    <string name="addroom">Добавить комнату</string>
+    <string name="nameroom">Название комнаты</string>
+    <string name="chooseroom">Выберите тип комнаты</string>
+    <string name="save">Сохранить</string>
+    <string name="living_room">Гостиная</string>
+    <string name="kitchen">Кухня</string>
+    <string name="bathroom">Ванная</string>
+    <string name="office">Кабинет</string>
+    <string name="bedroom">Спальня</string>
+    <string name="hall">Зал</string>
 </resources>

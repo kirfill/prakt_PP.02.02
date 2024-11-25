@@ -80,24 +80,24 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/saveButton"
             android:layout_width="350dp"
             android:layout_height="80dp"
             android:textSize="25dp"
             android:text="Зарегистрироваться"
             android:layout_marginTop="50dp"
-            android:background="@drawable/battonbeg"
-            style="@style/CustomButtonStyleTesr"/>
+            android:clickable="true"
+            android:focusable="true"/>
 
         <Button
-            android:id="@+id/submitButton"
+            android:id="@+id/loginButton"
             android:layout_width="350dp"
             android:layout_height="80dp"
             android:textSize="25dp"
             android:text="Уже есть аккаунт"
             android:layout_marginTop="25dp"
-            android:background="@drawable/battonbeggr"
-            style="@style/CustomButtonStyleTesr"/>
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
 </LinearLayout>
