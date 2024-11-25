@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:textSize="25dp"
                 android:padding="16dp"
                 android:textColor="@android:color/black"
@@ -68,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:textSize="25dp"
                 android:padding="16dp"
                 android:textColor="@android:color/black"
@@ -78,21 +80,21 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/submitButton"
+            android:id="@+id/button4"
             android:layout_width="350dp"
             android:layout_height="80dp"
             android:textSize="25dp"
-            android:text="Зарегестрироваться"
+            android:text="Зарегистрироваться"
             android:layout_marginTop="50dp"
             android:background="@drawable/battonbeg"
             style="@style/CustomButtonStyleTesr"/>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/submitButton"
             android:layout_width="350dp"
             android:layout_height="80dp"
             android:textSize="25dp"
-            android:text="Войти"
+            android:text="Уже есть аккаунт"
             android:layout_marginTop="25dp"
             android:background="@drawable/battonbeggr"
             style="@style/CustomButtonStyleTesr"/>

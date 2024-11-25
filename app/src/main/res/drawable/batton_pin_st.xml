@@ -4,10 +4,10 @@
     <corners android:radius="15dp"/>
 
     <!-- Прозрачный фон -->
-    <solid android:color="@android:color/transparent"/>
+<!--    <solid android:color="@android:color/transparent"/>-->
 
     <!-- Чёрная обводка -->
     <stroke
         android:width="3dp"
-    android:color="#000000"/>
+        android:color="#000000"/>
 </shape>
