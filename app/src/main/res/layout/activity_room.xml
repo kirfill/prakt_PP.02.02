@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RoomActivity">
+    <LinearLayout
+        android:padding="18dp"
+        android:orientation="vertical"
+        android:background="#2A2A37"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:onClick="Back"
+                android:src="@drawable/btnback"
+
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"/>
+            <TextView
+                android:paddingEnd="40dp"
+
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/addroom"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/nameEdit"
+        android:layout_marginTop="28dp"
+
+        android:textColor="@color/black"
+
+        android:hint="@string/nameroom"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="15dp"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="5dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+
+        android:paddingStart="20dp"
+        android:paddingTop="22dp"
+        android:textColor="#93939A"
+        android:textSize="14sp"
+        android:text="@string/chooseroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:id="@+id/roomTypeRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/livingRoomRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/radio_button_style"
+            android:button="@null"
+
+            android:text="@string/living_room"
+            android:textColor="@color/radio_button_text_color"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/kitchenRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/radio_button_style"
+            android:button="@null"
+
+            android:text="@string/kitchen"
+            android:textColor="@color/radio_button_text_color"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/bathroomRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/radio_button_style"
+            android:button="@null"
+
+            android:text="@string/bathroom"
+            android:textColor="@color/radio_button_text_color"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/officeRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/radio_button_style"
+            android:button="@null"
+
+            android:text="@string/office"
+            android:textColor="@color/radio_button_text_color"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/bedroomRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/radio_button_style"
+            android:button="@null"
+
+            android:text="@string/bedroom"
+            android:textColor="@color/radio_button_text_color"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <RadioButton
+            android:id="@+id/hallRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/radio_button_style"
+            android:button="@null"
+
+            android:text="@string/hall"
+            android:textColor="@color/radio_button_text_color"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_marginTop="105dp"
+        android:text="@string/save"
+        android:layout_gravity="center"
+
+        android:paddingVertical="10dp"
+        android:onClick="Save"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
