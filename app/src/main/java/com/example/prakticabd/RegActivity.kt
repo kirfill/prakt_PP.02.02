@@ -2,8 +2,12 @@ package com.example.prakticabd
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -46,7 +50,11 @@ class RegActivity : AppCompatActivity() {
                 val password = passwordEditText.text.toString()
 
                 if (validateInput(username, email, password)) {
-                    registerUser(username, email, password)
+                    if (isInternetAvailable()) {
+                        checkEmailExistsAndRegisterUser(username, email, password)
+                    } else {
+                        Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
 
@@ -79,12 +87,38 @@ class RegActivity : AppCompatActivity() {
             return false
         }
 
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showToast("Пожалуйста, введите корректный email")
             return false
         }
 
         return true
+    }
+
+    private fun isInternetAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+    private fun checkEmailExistsAndRegisterUser(username: String, email: String, password: String) {
+        lifecycleScope.launch {
+            try {
+                // Проверяем существует ли пользователь с таким email
+                val exists = SupabaseClient.checkEmailExists(email)
+                if (exists) {
+                    Toast.makeText(this@RegActivity, "Пользователь с таким email уже существует", Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+
+                // Если email не существует, регистрируем нового пользователя
+                registerUser(username, email, password)
+            } catch (e: Exception) {
+                Log.e(TAG, "Ошибка при регистрации", e)
+                showToast("Ошибка регистрации: ${e.message}")
+            }
+        }
     }
 
     private fun registerUser(username: String, email: String, password: String) {

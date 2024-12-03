@@ -23,13 +23,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Инициализация views
+        // Инит
         emailEditText = findViewById(R.id.loginEmailEditText)
         passwordEditText = findViewById(R.id.loginPasswordEditText)
         loginButton = findViewById(R.id.loginButton)
         backToRegisterButton = findViewById(R.id.backToRegisterButton)
 
-        // Обработчик кнопки входа
+        // кнопки входа
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
@@ -42,9 +42,9 @@ class LoginActivity : AppCompatActivity() {
             loginUser(email, password)
         }
 
-        // Обработчик кнопки возврата к регистрации
+        // возврата к регистрации
         backToRegisterButton.setOnClickListener {
-            finish() // Просто закрываем этот экран, вернувшись к RegActivity
+            finish()
         }
     }
 
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 if (isValid) {
                     Log.d(TAG, "Вход успешен, сохраняем email")
                     
-                    // Сохраняем email в SharedPreferences
+                    // Сохраняем email
                     saveUserEmail(email)
                     
                     // Переходим на главный экран

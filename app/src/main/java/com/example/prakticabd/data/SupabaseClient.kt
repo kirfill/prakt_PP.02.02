@@ -1,9 +1,9 @@
 package com.example.prakticabd.data
 
+import android.util.Log
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.postgrest
-import com.example.prakticabd.models.User
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.JsonObject
@@ -19,6 +19,15 @@ object SupabaseClient {
         supabaseKey = SUPABASE_KEY
     ) {
         install(Postgrest)
+    }
+
+    suspend fun checkEmailExists(email: String): Boolean {
+        val response = client.postgrest["users"]
+            .select(Columns.raw("email")) {
+                eq("email", email)
+            }
+            .decodeList<JsonObject>()
+        return response.isNotEmpty()
     }
 
     suspend fun saveUserData(username: String, email: String, password: String) {
@@ -42,71 +51,72 @@ object SupabaseClient {
 
     suspend fun saveUserAddress(email: String, address: String) {
         try {
-            // Получаем user_id по email
-            val userId = getUserIdByEmail(email)
-            
-            // Проверяем, существует ли уже адрес для этого пользователя
-            val existingAddress = client.postgrest["user_addresses"]
-                .select(Columns.raw("id")) {
-                    eq("user_id", userId)
-                }
-                .decodeList<JsonObject>()
-
             val addressData = buildJsonObject {
-                put("user_id", userId)
                 put("address", address)
             }
 
-            if (existingAddress.isEmpty()) {
-                // Если адреса нет, создаем новый
-                client.postgrest["user_addresses"].insert(addressData)
-            } else {
-                // Если адрес есть, обновляем его
-                client.postgrest["user_addresses"]
-                    .update(addressData) {
-                        eq("user_id", userId)
-                    }
-            }
+            client.postgrest["users"]
+                .update(addressData) {
+                    eq("email", email)
+                }
         } catch (e: Exception) {
             throw Exception("Ошибка при сохранении адреса: ${e.message}")
         }
     }
 
-    suspend fun getUserAddress(email: String): String? {
-        return try {
-            val userId = getUserIdByEmail(email)
-            val response = client.postgrest["user_addresses"]
-                .select(Columns.raw("address")) {
-                    eq("user_id", userId)
-                }
-                .decodeList<JsonObject>()
-            
-            if (response.isNotEmpty()) {
-                response[0]["address"]?.jsonPrimitive?.content
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            null
-        }
+    suspend fun updateUserAddress(email: String, newAddress: String) {
+        saveUserAddress(email, newAddress)
     }
 
-    private suspend fun getUserIdByEmail(email: String): String {
-        try {
+    suspend fun getUserIdByEmail(email: String): String? {
+        return try {
             val response = client.postgrest["users"]
                 .select(Columns.raw("id")) {
                     eq("email", email)
                 }
-                .decodeList<JsonObject>()
-            
-            if (response.isEmpty()) {
-                throw Exception("Пользователь с email $email не найден")
-            }
-            
-            return response[0]["id"]?.jsonPrimitive?.content 
-                ?: throw Exception("ID пользователя не найден")
+                .decodeSingle<JsonObject>()
+            response["id"]?.jsonPrimitive?.content
         } catch (e: Exception) {
-            throw Exception("Ошибка при получении ID пользователя: ${e.message}")
+            Log.e("SupabaseClient", "Error getting user ID: ${e.message}")
+            null
+        }
+    }
+
+    suspend fun getUserAddress(email: String): String? {
+        return try {
+            val response = client.postgrest["users"]
+                .select(Columns.raw("address")) {
+                    eq("email", email)
+                }
+                .decodeList<JsonObject>()
+            response.firstOrNull()?.get("address")?.jsonPrimitive?.content
+        } catch (e: Exception) {
+            Log.e("SupabaseClient", "Error getting user address", e)
+            null
+        }
+    }
+
+    suspend fun saveRoom(name: String, typeId: String, userId: String) {
+        val roomData = buildJsonObject {
+            put("name", name)
+            put("type_id", typeId.toInt())
+            put("user_id", userId)
+        }
+        Log.d("SupabaseClient", "Saving room with data: $roomData")
+        client.postgrest["rooms"].insert(roomData)
+    }
+
+    fun getRoomTypeName(typeId: Int): String {
+        return when (typeId) {
+            1 -> "Гостиная"
+            2 -> "Кухня"
+            3 -> "Ванная"
+            4 -> "Кабинет"
+            5 -> "Спальня"
+            6 -> "Зал"
+            else -> "Неизвестный тип"
         }
     }
 }
+
+data class Room(val id: String, val name: String, val typeId: Int)

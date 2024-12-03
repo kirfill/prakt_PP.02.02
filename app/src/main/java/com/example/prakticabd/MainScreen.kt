@@ -17,7 +17,7 @@ class MainScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
         
-        // Получаем email из SharedPreferences
+        // Получаем email
         val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         userEmail = sharedPref.getString("USER_EMAIL", "") ?: ""
         
@@ -26,7 +26,7 @@ class MainScreen : AppCompatActivity() {
             finish()
             return
         }
-        
+
         recyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
         // TODO: Установить адаптер для RecyclerView

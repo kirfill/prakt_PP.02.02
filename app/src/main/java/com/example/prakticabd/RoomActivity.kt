@@ -25,7 +25,7 @@ class RoomActivity : AppCompatActivity() {
         nameEdit = findViewById(R.id.nameEdit)
         roomTypeRadioGroup = findViewById(R.id.roomTypeRadioGroup)
         
-        // Получаем email из SharedPreferences
+        // Получаем email
         val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         userEmail = sharedPref.getString("USER_EMAIL", "") ?: ""
         
@@ -61,7 +61,7 @@ class RoomActivity : AppCompatActivity() {
             return
         }
 
-        // Получаем UUID типа комнаты на основе выбранного RadioButton
+        // Получаем тип комнаты
         val typeId = when (selectedRadioButtonId) {
             R.id.livingRoomRadio -> "1" // Гостиная
             R.id.kitchenRadio -> "2"    // Кухня

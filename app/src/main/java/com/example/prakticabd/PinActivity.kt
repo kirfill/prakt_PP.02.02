@@ -34,9 +34,6 @@ class PinActivity : AppCompatActivity() {
         setupNumericButton(R.id.buttonPIN7, "7")
         setupNumericButton(R.id.buttonPIN8, "8")
         setupNumericButton(R.id.buttonPIN9, "9")
-
-
-
     }
 
     private fun setupNumericButton(buttonId: Int, number: String) {
@@ -45,7 +42,7 @@ class PinActivity : AppCompatActivity() {
                 enteredPin.append(number)
                 updatePinDots()
                 
-                // Проверяем, достигнута ли длина 4
+                // Проверяем длина 4
                 if (enteredPin.length == 4) {
                     savePin(enteredPin.toString())
                 }
@@ -68,18 +65,18 @@ class PinActivity : AppCompatActivity() {
     }
 
     private fun savePin(pin: String) {
-        // Сохраняем PIN в SharedPreferences
+        // Сохраняем PIN
         val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
             putString("PIN_CODE", pin)
             apply()
         }
 
-        // Показываем сообщение об успешном сохранении
+        // Показываем сообщение
         Toast.makeText(this, "PIN-код успешно сохранен", Toast.LENGTH_SHORT).show()
 
-        // Переходим на следующий экран (если нужно)
-        // startActivity(Intent(this, NextActivity::class.java))
-        // finish()
+        // Переходим на MainScreen
+        startActivity(Intent(this, MainScreen::class.java))
+        finish()
     }
 }

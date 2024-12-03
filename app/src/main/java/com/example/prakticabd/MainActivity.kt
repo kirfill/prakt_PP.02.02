@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // Инициализация views
+
         emailEditText = findViewById(R.id.loginEmailEditText)
         passwordEditText = findViewById(R.id.loginPasswordEditText)
         loginButton = findViewById(R.id.loginButton)
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 SupabaseClient.loginUser(email, password)
                 showToast("Вход выполнен успешно!")
-                // Здесь можно перейти на главный экран приложения
+                // перехо глав экран
                 startActivity(Intent(this@MainActivity, AddAddressActivity::class.java))
                 finish()
             } catch (e: Exception) {

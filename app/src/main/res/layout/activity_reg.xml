@@ -87,7 +87,8 @@
             android:text="Зарегистрироваться"
             android:layout_marginTop="50dp"
             android:clickable="true"
-            android:focusable="true"/>
+            android:focusable="true"
+            style=""/>
 
         <Button
             android:id="@+id/loginButton"
