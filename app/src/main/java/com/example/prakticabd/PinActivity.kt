@@ -78,8 +78,8 @@ class PinActivity : AppCompatActivity() {
         // Показываем сообщение об успешном сохранении
         Toast.makeText(this, "PIN-код успешно сохранен", Toast.LENGTH_SHORT).show()
 
-        // Переходим на экран MainScreen
-        startActivity(Intent(this, MainScreen::class.java))
-        finish()
+        // Переходим на следующий экран (если нужно)
+        // startActivity(Intent(this, NextActivity::class.java))
+        // finish()
     }
 }
